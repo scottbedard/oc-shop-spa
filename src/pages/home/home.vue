@@ -9,10 +9,6 @@
         width: 100%;
     }
 
-    img {
-        margin: 20px;
-    }
-
     a {
         display: block;
         font-size: 1.5rem;
@@ -23,12 +19,10 @@
 <template>
     <div class="home-page">
         <div>
-            <img src="../../assets/vue.png" alt="Vue.js" />
-            <img src="../../assets/october.png" alt="October CMS" />
-            <h1>Welcome to your new Vuetober theme!</h1>
-            <h2>It's time to build something amazing.</h2>
-            <router-link :to="{ name: 'videos' }">Getting started video series</router-link>
-            <a href="https://github.com/scottbedard/oc-vuetober-theme">GitHub Repository</a>
+            <h1>oc-shop-spa</h1>
+            <h2>This theme will begin development soon.</h2>
+            <a href="https://github.com/scottbedard/oc-shop-plugin">Plugin Repository</a>
+            <a href="https://github.com/scottbedard/oc-shop-spa">Theme Repository</a>
         </div>
     </div>
 </template>
