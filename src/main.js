@@ -13,6 +13,12 @@ const router = new VueRouter({
     routes,
 });
 
+router.afterEach(route => {
+    // send the pageview to google analytics
+    ga('set', 'page', route.path);
+    ga('send', 'pageview');
+});
+
 // instantiate our application and mount it to the dom
 /* eslint-disable no-new */
 new Vue({
