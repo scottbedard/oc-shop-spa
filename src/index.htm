@@ -2,9 +2,17 @@
 url = "/:all?*"
 is_hidden = 0
 ==
+use Bedard\Shop\Repositories\CategoryRepository;
+
 function onStart()
 {
     $this['token'] = \Session::token();
+
+    $repository = new CategoryRepository;
+
+    $this['data'] = json_encode([
+        'categories' => $repository->get(),
+    ]);
 }
 ==
 <!-- htmlmin:ignore -->
@@ -15,6 +23,7 @@ function onStart()
         <meta charset="utf-8">
         <meta name="token" content="{{ token }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="bedard.shop" content="{{ data }}">
 
         <!-- Resources -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
