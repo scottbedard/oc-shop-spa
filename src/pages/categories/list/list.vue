@@ -20,6 +20,7 @@
         }
 
         .v-card {
+            padding: 0;
             transition: transform 250ms ease-in-out;
 
             &:hover {
@@ -28,6 +29,9 @@
         }
 
         a {
+            display: block;
+            padding: 24px 20px;
+
             &:hover {
                 text-decoration: none;
             }
@@ -50,8 +54,7 @@
             <div class="list" v-else>
                 <div v-for="category in categories" :key="category.id">
                     <v-card>
-                        <router-link
-                            :to="{ name: 'category', params: { slug: category.slug }}">
+                        <router-link :to="{ name: 'category', params: { slug: category.slug }}">
                             <h2>{{ category.name }}</h2>
                             <p>{{ category.description_plain }}</p>
                         </router-link>
