@@ -4,6 +4,8 @@
     header {
         height: 60px;
         position: relative;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 24px;
     }
 
     .v-header-title {

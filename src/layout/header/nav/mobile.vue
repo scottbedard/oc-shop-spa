@@ -1,7 +1,6 @@
 <style lang="scss" scoped>@import 'core';
     // backdrop
     .v-mobile-nav-backdrop {
-        border: 5px solid blue;
         position: fixed;
         top: 0;
         left: 0;

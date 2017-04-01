@@ -16,7 +16,7 @@
         left: 0;
         outline: 0;
         position: fixed;
-        top: 0;
+        top: 3px;
         z-index: 3;
     }
 
