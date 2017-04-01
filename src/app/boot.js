@@ -18,6 +18,11 @@ require('./plugins/router');
 require('./directives/linkable');
 
 //
+// Filters
+//
+require('./filters/money');
+
+//
 // Register global components
 //
 import components from 'src/components/global';

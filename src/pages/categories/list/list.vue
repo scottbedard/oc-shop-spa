@@ -10,7 +10,7 @@
         flex-wrap: wrap;
         margin: -24px -20px;
 
-        div {
+        > div {
             flex-basis: auto;
             padding: 24px 20px;
             transition: width 150ms ease-in-out;
@@ -19,16 +19,17 @@
             @include bp(desktop) { width: 33.3333% }
         }
 
-        a {
-            display: block;
-            border-radius: 3px;
-            padding: 24px 20px;
-            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
-            transition: transform 150ms ease-in-out;
+        .v-card {
+            transition: transform 250ms ease-in-out;
 
             &:hover {
-                text-decoration: none;
                 transform: translateY(-4px);
+            }
+        }
+
+        a {
+            &:hover {
+                text-decoration: none;
             }
 
             h2 {
@@ -48,11 +49,13 @@
             </v-loading>
             <div class="list" v-else>
                 <div v-for="category in categories" :key="category.id">
-                    <router-link
-                        :to="{ name: 'category', params: { slug: category.slug }}">
-                        <h2>{{ category.name }}</h2>
-                        <p>{{ category.description_plain }}</p>
-                    </router-link>
+                    <v-card>
+                        <router-link
+                            :to="{ name: 'category', params: { slug: category.slug }}">
+                            <h2>{{ category.name }}</h2>
+                            <p>{{ category.description_plain }}</p>
+                        </router-link>
+                    </v-card>
                 </div>
             </div>
         </transition>

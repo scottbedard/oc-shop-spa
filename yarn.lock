@@ -4046,9 +4046,9 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
-oc-shop-api@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/oc-shop-api/-/oc-shop-api-0.1.1.tgz#77d671c287a78dadf6d432db0d3200a6c61c979c"
+oc-shop-api@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/oc-shop-api/-/oc-shop-api-0.1.2.tgz#6070982fc077cd558b6d4b81ca36c3d3f9bd2082"
 
 on-finished@~2.3.0:
   version "2.3.0"

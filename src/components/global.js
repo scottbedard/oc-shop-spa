@@ -4,6 +4,7 @@ export default {
     //
     // layout
     //
+    'v-card': require('./layout/card'),
     'v-loading': require('./layout/loading'),
     'v-page': require('./layout/page'),
 
