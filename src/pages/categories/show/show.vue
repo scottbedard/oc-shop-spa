@@ -15,6 +15,22 @@
         }
 
         .v-card {
+            padding: 0;
+            transition: transform 250ms ease-in-out;
+
+            &:hover {
+                transform: translateY(-4px);
+            }
+
+            a {
+                display: block;
+                padding: 24px 20px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
             h2 {
                 margin: 0;
             }
@@ -42,9 +58,11 @@
                 <div v-else class="products">
                     <div v-for="product in category.products">
                         <v-card>
-                            <h2>{{ product.name }}</h2>
-                            <p>{{ product.description_plain }}</p>
-                            <p class="money">{{ product.base_price | money }}</p>
+                            <router-link :to="{ name: 'product', params: { slug: product.slug }}">
+                                <h2>{{ product.name }}</h2>
+                                <p>{{ product.description_plain }}</p>
+                                <p class="money">{{ product.base_price | money }}</p>
+                            </router-link>
                         </v-card>
                     </div>
                 </div>

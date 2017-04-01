@@ -31,7 +31,7 @@ export default [
     //
     {
         name: 'product',
-        path: '/product',
+        path: '/product/:slug',
         component: require('src/pages/products/show/show'),
     },
 ];
