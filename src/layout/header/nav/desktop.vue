@@ -7,9 +7,9 @@
     }
 
     a {
-        font-size: 14px;
+        font-size: 16px;
+        font-weight: 300;
         position: relative;
-        // font-weight: 400;
 
         &:not(:last-child) {
             margin-right: 20px;
@@ -41,23 +41,11 @@
 
 <template>
     <div class="v-desktop-nav">
-        <router-link
-            v-for="category in categories"
-            :key="category.id"
-            :to="`/categories/${ category.slug }`">
-            {{ category.name }}
+        <router-link :to="{ name: 'home' }">
+            Home
+        </router-link>
+        <router-link :to="{ name: 'categories' }">
+            Categories
         </router-link>
     </div>
 </template>
-
-<script>
-    export default {
-        data() {
-            let data = document.querySelector('meta[name="bedard.shop"]').content;
-
-            return {
-                categories: JSON.parse(data).categories,
-            };
-        },
-    };
-</script>

@@ -20,7 +20,7 @@
     <div class="home-page">
         <div>
             <h1>oc-shop-spa</h1>
-            <h2>This theme will begin development soon.</h2>
+            <h2>This theme is a work in progress, and is not ready for use by anyone.</h2>
             <a href="https://github.com/scottbedard/oc-shop-plugin">Plugin Repository</a>
             <a href="https://github.com/scottbedard/oc-shop-spa">Theme Repository</a>
         </div>
