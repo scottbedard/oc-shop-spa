@@ -11,5 +11,8 @@ export default {
     //
     // ui
     //
+    'v-button': require('./ui/button'),
+    'v-input': require('./ui/input'),
+    'v-select': require('./ui/select'),
     'v-spinner': require('./ui/spinner'),
 };

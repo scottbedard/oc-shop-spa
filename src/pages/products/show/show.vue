@@ -10,6 +10,12 @@
                 <h1>{{ product.name }}</h1>
                 <p>{{ product.description_plain }}</p>
                 <p>{{ product.base_price | money }}</p>
+
+                <v-inventory-selector :product="product" />
+
+                <v-button @click="onAddToCartClicked">
+                    Add to cart
+                </v-button>
             </div>
         </transition>
     </v-page>
@@ -28,12 +34,18 @@
                 product: {},
             };
         },
+        components: {
+            'v-inventory-selector': require('./inventory_selector/inventory_selector'),
+        },
         methods: {
             fetchProduct() {
                 this.isLoading = true;
                 Shop.findProduct(this.$route.params.slug)
                     .then(this.onFetchComplete)
                     .catch(this.onFetchFailed);
+            },
+            onAddToCartClicked() {
+                console.log ('ok');
             },
             onFetchComplete(response) {
                 this.isLoading = false;
