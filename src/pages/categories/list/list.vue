@@ -76,6 +76,7 @@
             return {
                 categories: [],
                 isLoading: false,
+                total: 0,
             };
         },
         methods: {
@@ -87,7 +88,8 @@
                     .catch(this.onFetchFailed);
             },
             onFetchComplete(response) {
-                this.categories = response.data;
+                this.total = response.data.total;
+                this.categories = response.data.results;
                 this.isLoading = false;
             },
             onFetchFailed() {

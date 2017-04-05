@@ -48,7 +48,7 @@
         <transition name="fade" mode="out-in">
             <v-loading v-if="isLoading">Loading category...</v-loading>
             <div v-else>
-                <h1>{{ category.name }} ({{ productCount }})</h1>
+                <h1>{{ category.name }} ({{ productCount }} of {{ total }})</h1>
                 <p>{{ category.description_plain }}</p>
 
                 <!-- Empty -->
@@ -56,7 +56,7 @@
 
                 <!-- Products -->
                 <div v-else class="products">
-                    <div v-for="product in category.products">
+                    <div v-for="product in products">
                         <v-card>
                             <router-link :to="{ name: 'product', params: { slug: product.slug }}">
                                 <h2>{{ product.name }}</h2>
@@ -82,6 +82,8 @@
             return {
                 category: {},
                 isLoading: false,
+                products: [],
+                total: 0,
             };
         },
         computed: {
@@ -89,30 +91,31 @@
                 return this.productCount === 0;
             },
             productCount() {
-                if (! Array.isArray(this.category.product_count) || ! this.category.product_count.length) {
-                    return 0;
-                }
-
-                return this.category.product_count[0].count;
+                return this.products.length;
             },
         },
         methods: {
             fetchCategory() {
                 this.isLoading = true;
 
-                const params = {
-                    with: [
-                        'product_count',
-                        'products',
-                    ],
-                };
+                let category = Shop.findCategory(this.$route.params.slug)
+                    .then(this.onCategoryFetchComplete);
 
-                Shop.findCategory(this.$route.params.slug, params)
+                let products = Shop.getProducts({ categories: this.$route.params.slug })
+                    .then(this.onProductsFetchComplete);
+
+                Promise.all([category, products])
                     .then(this.onFetchComplete)
                     .catch(this.onFetchFailed);
             },
-            onFetchComplete(response) {
+            onCategoryFetchComplete(response) {
                 this.category = response.data;
+            },
+            onProductsFetchComplete(response) {
+                this.total = response.data.total;
+                this.products = response.data.results;
+            },
+            onFetchComplete(response) {
                 this.isLoading = false;
             },
             onFetchFailed(error) {
