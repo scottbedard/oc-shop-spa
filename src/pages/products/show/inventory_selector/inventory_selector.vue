@@ -1,8 +1,6 @@
 <style lang="scss" scoped>@import 'core';
-    .option,
-    .quantity {
+    .option {
         margin-bottom: 24px;
-        max-width: 320px;
     }
 
     label {
@@ -18,7 +16,7 @@
             <v-select
                 :id="`option_${ option.id }`"
                 :value="findSelection(option).value"
-                @input="onValueselections(option, $event)">
+                @input="onSelectionChanged(option, $event)">
                 <option>{{ option.placeholder }}</option>
                 <option
                     v-for="value in option.values"
@@ -27,15 +25,6 @@
                     {{ getValueText(value) }}
                 </option>
             </v-select>
-        </div>
-        <div class="quantity">
-            <label for="quantity">Quantity</label>
-            <v-input
-                v-model="quantity"
-                id="quantity"
-                min="0"
-                type="number"
-            />
         </div>
     </div>
 </template>
@@ -49,6 +38,8 @@
                     value: null,
                 };
             });
+
+            this.emitSelectedInventory();
         },
         data() {
             return {
@@ -57,8 +48,20 @@
             };
         },
         methods: {
+            emitSelectedInventory() {
+                let selectionIds = this.selections.map(selection => selection.value);
+
+                let inventory = selectionIds.filter(id => id).length
+                    ? this.getInventoryByValueIds(selectionIds)
+                    : this.getDefaultInventory();
+
+                this.$emit('input', inventory || null);
+            },
             findSelection(option) {
                 return this.selections.find(model => model.option == option.id);
+            },
+            getDefaultInventory() {
+                return this.product.inventories.find(inventory => ! inventory.values.length);
             },
             getInventoryByValueIds(valueIds) {
                 return this.product.inventories.find(inventory => {
@@ -88,14 +91,18 @@
 
                 return ! inventory || inventory.quantity < 1;
             },
-            onValueselections(option, value) {
+            onSelectionChanged(option, value) {
                 this.findSelection(option).value = Number(value);
+                this.emitSelectedInventory();
             },
         },
         props: {
             product: {
                 required: true,
                 type: Object,
+            },
+            value: {
+                required: true,
             },
         },
     };

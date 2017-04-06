@@ -1,5 +1,8 @@
 <style lang="scss" scoped>@import 'core';
-
+    .add-to-cart-inputs {
+        margin-bottom: 24px;
+        max-width: 320px;
+    }
 </style>
 
 <template>
@@ -11,9 +14,22 @@
                 <p>{{ product.description_plain }}</p>
                 <p>{{ product.base_price | money }}</p>
 
-                <v-inventory-selector :product="product" />
+                <div class="add-to-cart-inputs">
+                    <v-inventory-selector v-model="selectedInventory" :product="product" />
+                    <div class="quantity">
+                        <label for="quantity">Quantity</label>
+                        <v-input
+                            v-model="quantity"
+                            id="quantity"
+                            min="0"
+                            type="number"
+                        />
+                    </div>
+                </div>
 
-                <v-button @click="onAddToCartClicked">
+                <v-button
+                    :disabled="! isAddable"
+                    @click="onAddToCartClicked">
                     Add to cart
                 </v-button>
             </div>
@@ -32,10 +48,17 @@
             return {
                 isLoading: false,
                 product: {},
+                quantity: 1,
+                selectedInventory: null,
             };
         },
         components: {
             'v-inventory-selector': require('./inventory_selector/inventory_selector'),
+        },
+        computed: {
+            isAddable() {
+                return Boolean(this.selectedInventory);
+            },
         },
         methods: {
             fetchProduct() {

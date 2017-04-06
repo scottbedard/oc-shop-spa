@@ -12,11 +12,16 @@
             transform: translateY(2px);
         }
 
+        &:disabled {
+            border-color: #ccc;
+            color: #ccc;
+        }
+
         &:focus {
             outline: 0;
         }
 
-        &:hover {
+        &:not(:disabled):hover {
             background-color: $vue-green;
             color: #fff;
         }
