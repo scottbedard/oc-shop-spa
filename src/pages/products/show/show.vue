@@ -23,6 +23,7 @@
                             id="quantity"
                             min="0"
                             type="number"
+                            :max="maxQuantity"
                         />
                     </div>
                 </div>
@@ -59,6 +60,11 @@
             isAddable() {
                 return Boolean(this.selectedInventory);
             },
+            maxQuantity() {
+                return this.selectedInventory
+                    ? this.selectedInventory.quantity
+                    : null;
+            },
         },
         methods: {
             fetchProduct() {
@@ -76,6 +82,13 @@
             },
             onFetchFailed(error) {
                 // @todo: add an error state
+            },
+        },
+        watch: {
+            selectedInventory(selectedInventory) {
+                if (selectedInventory && this.quantity > selectedInventory.quantity) {
+                    this.quantity = selectedInventory.quantity;
+                }
             },
         },
     };
