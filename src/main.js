@@ -2,7 +2,12 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // set up our global plugins and utilities
-require('./app/boot');
+import './app/boot';
+
+// once vuex is installed, install our shop module
+import store from './app/store';
+import shop from 'oc-shop-api';
+shop.sync(store);
 
 // set up the router
 import routes from './app/routes';
@@ -25,4 +30,5 @@ new Vue({
     render: h => h(require('./root')),
     el: '#app',
     router,
+    store,
 });

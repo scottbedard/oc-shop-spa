@@ -72,7 +72,7 @@
 </template>
 
 <script>
-    import Shop from 'oc-shop-api';
+    import ShopRepository from 'oc-shop-api/repository';
 
     export default {
         created() {
@@ -98,10 +98,10 @@
             fetchCategory() {
                 this.isLoading = true;
 
-                let category = Shop.findCategory(this.$route.params.slug)
+                let category = ShopRepository.findCategory(this.$route.params.slug)
                     .then(this.onCategoryFetchComplete);
 
-                let products = Shop.getProducts({ categories: this.$route.params.slug })
+                let products = ShopRepository.getProducts({ categories: this.$route.params.slug })
                     .then(this.onProductsFetchComplete);
 
                 Promise.all([category, products])

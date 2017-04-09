@@ -11,6 +11,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 // Plugins
 //
 require('./plugins/router');
+require('./plugins/vuex');
 
 //
 // Directives

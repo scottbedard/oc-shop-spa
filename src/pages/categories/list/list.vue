@@ -66,7 +66,7 @@
 </template>
 
 <script>
-    import Shop from 'oc-shop-api';
+    import ShopRepository from 'oc-shop-api/repository';
 
     export default {
         created() {
@@ -83,7 +83,7 @@
             fetchCategories() {
                 this.isLoading = true;
 
-                Shop.getCategories()
+                ShopRepository.getCategories()
                     .then(this.onFetchComplete)
                     .catch(this.onFetchFailed);
             },

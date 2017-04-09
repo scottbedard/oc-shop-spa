@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import Shop from 'oc-shop-api';
+    import ShopRepository from 'oc-shop-api/repository';
 
     export default {
         created() {
@@ -69,12 +69,20 @@
         methods: {
             fetchProduct() {
                 this.isLoading = true;
-                Shop.findProduct(this.$route.params.slug)
+                ShopRepository.findProduct(this.$route.params.slug)
                     .then(this.onFetchComplete)
                     .catch(this.onFetchFailed);
             },
+            onAddComplete(response) {
+                console.log ('did it', response);
+            },
+            onAddFailed() {
+                // @todo: add an error state
+            },
             onAddToCartClicked() {
-                console.log ('ok');
+                this.$store.dispatch('shop/addToCart', this.selectedInventory.id, this.quantity)
+                    .then(this.onAddComplete)
+                    .catch(this.onAddFailed);
             },
             onFetchComplete(response) {
                 this.isLoading = false;
