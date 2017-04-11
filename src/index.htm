@@ -2,16 +2,21 @@
 url = "/:all?*"
 is_hidden = 0
 ==
+use Bedard\Shop\Repositories\CartRepository;
 use Bedard\Shop\Repositories\CategoryRepository;
 
 function onStart()
 {
     $this['token'] = \Session::token();
 
-    $repository = new CategoryRepository;
+    $cartRepository = new CartRepository;
+    $categoryRepository = new CategoryRepository;
 
     $this['data'] = json_encode([
-        'categories' => $repository->get(),
+        'cart' => $cartRepository->findOrNew([
+            'relationships' => ['items.product'],
+        ]),
+        'categories' => $categoryRepository->get(),
     ]);
 }
 ==

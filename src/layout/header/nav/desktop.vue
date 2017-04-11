@@ -47,5 +47,21 @@
         <router-link :to="{ name: 'categories' }">
             Categories
         </router-link>
+
+        <router-link :to="{ name: 'cart' }">
+            Cart ({{ items }})
+        </router-link>
     </div>
 </template>
+
+<script>
+    import { mapGetters } from 'vuex';
+
+    export default {
+        computed: {
+            ...mapGetters({
+                items: 'shop/itemsInCart',
+            }),
+        },
+    };
+</script>

@@ -3,6 +3,18 @@
         margin-bottom: 24px;
         max-width: 320px;
     }
+
+    .loading-message {
+        align-items: center;
+        display: flex;
+
+        span {
+            font-size: 14px;
+            padding-left: 20px;
+            font-weight: 300;
+            color: $vue-green;
+        }
+    }
 </style>
 
 <template>
@@ -19,7 +31,7 @@
                     <div class="quantity">
                         <label for="quantity">Quantity</label>
                         <v-input
-                            v-model="quantity"
+                            v-model.number="quantity"
                             id="quantity"
                             min="0"
                             type="number"
@@ -28,11 +40,18 @@
                     </div>
                 </div>
 
-                <v-button
-                    :disabled="! isAddable"
-                    @click="onAddToCartClicked">
-                    Add to cart
-                </v-button>
+                <transition name="fade" mode="out-in">
+                    <div v-if="isAdding" class="loading-message">
+                        <v-spinner size="small" />
+                        <span>Adding to cart...</span>
+                    </div>
+                    <v-button
+                        v-else
+                        :disabled="! isAddable"
+                        @click="onAddToCartClicked">
+                        Add to cart
+                    </v-button>
+                </transition>
             </div>
         </transition>
     </v-page>
@@ -47,6 +66,7 @@
         },
         data() {
             return {
+                isAdding: false,
                 isLoading: false,
                 product: {},
                 quantity: 1,
@@ -69,20 +89,28 @@
         methods: {
             fetchProduct() {
                 this.isLoading = true;
+
                 ShopRepository.findProduct(this.$route.params.slug)
                     .then(this.onFetchComplete)
-                    .catch(this.onFetchFailed);
+                    .catch(this.onFetchFailed)
+                    .then(() => this.isLoading = false);
             },
             onAddComplete(response) {
-                console.log ('did it', response);
+                console.log ('Added to cart');
             },
             onAddFailed() {
                 // @todo: add an error state
             },
             onAddToCartClicked() {
-                this.$store.dispatch('shop/addToCart', this.selectedInventory.id, this.quantity)
+                this.isAdding = true;
+
+                let inventoryId = this.selectedInventory.id;
+                let quantity = this.quantity;
+
+                this.$store.dispatch('shop/addToCart', { inventoryId, quantity })
                     .then(this.onAddComplete)
-                    .catch(this.onAddFailed);
+                    .catch(this.onAddFailed)
+                    .then(() => this.isAdding = false);
             },
             onFetchComplete(response) {
                 this.isLoading = false;

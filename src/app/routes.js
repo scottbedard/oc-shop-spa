@@ -9,6 +9,15 @@ export default [
     },
 
     //
+    // cart
+    //
+    {
+        name: 'cart',
+        path: '/cart',
+        component: require('src/pages/cart/cart'),
+    },
+
+    //
     // category
     //
     {
