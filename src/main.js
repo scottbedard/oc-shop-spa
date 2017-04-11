@@ -23,8 +23,8 @@ const router = new VueRouter({
 
 // send the pageview to google analytics
 router.afterEach(route => {
-    ga('set', 'page', route.path);
-    ga('send', 'pageview');
+    // ga('set', 'page', route.path);
+    // ga('send', 'pageview');
 });
 
 // instantiate our application and mount it to the dom

@@ -4,7 +4,6 @@
         border-radius: 3px;
         border: 1px solid #ccc;
         outline: 0;
-        padding: 12px 20px;
         width: 100%;
 
         // hide number spinners
@@ -13,22 +12,55 @@
             appearance: none;
             margin: 0;
         }
+
+        //
+        // sizes
+        //
+        &.size-small {
+            height: 24px;
+            line-height: 24px;
+            padding: 0 10px;
+        }
+
+        &.size-medium {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
+        }
     }
 </style>
 
 <template>
-    <input :value="value" @input="onInput" />
+    <input
+        :class="[sizeClass]"
+        :value="value"
+        @input="onInput"
+    />
 </template>
 
 <script>
     export default {
+        computed: {
+            sizeClass() {
+                return `size-${ this.size }`;
+            },
+        },
         methods: {
             onInput(e) {
                 this.$emit('input', e.target.value);
             },
         },
-        props: [
-            'value',
-        ],
+        props: {
+            size: {
+                type: String,
+                validator(size) {
+                    return [
+                        'small',
+                        'medium',
+                    ].indexOf(size) > -1;
+                },
+            },
+            value: {},
+        },
     };
 </script>

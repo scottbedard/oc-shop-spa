@@ -1,0 +1,81 @@
+<style lang="scss" scoped>@import 'core';
+    .v-item {
+        transition: opacity 150ms ease-in-out;
+    }
+
+    .is-loading {
+        opacity: 0.5;
+    }
+
+    .quantity {
+        input {
+            text-align: center;
+        }
+    }
+</style>
+
+<template>
+    <div class="v-item row" :class="{ 'is-loading': isLoading }">
+        <div class="cell product">
+            <span>{{ name }}</span>
+        </div>
+        <div class="cell price">{{ basePrice | money }}</div>
+        <div class="cell quantity">
+            <v-input
+                v-model="quantity"
+                min="0"
+                size="small"
+                type="number"
+                :max="inventory.quantity"
+            />
+        </div>
+        <div class="cell remove">
+            <a href="#" @click.prevent="onRemoveClicked">
+                <!-- <i class="fa fa-times"></i> -->
+                Remove
+            </a>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                inventory: this.item.inventory,
+                isLoading: false,
+                quantity: this.item.quantity,
+            };
+        },
+        computed: {
+            basePrice() {
+                return this.item.product.base_price;
+            },
+            name() {
+                return this.item.product.name;
+            },
+        },
+        methods: {
+            onRemoveClicked() {
+                if (! this.isLoading) {
+                    this.isLoading = true;
+
+                    this.$store.dispatch('shop/removeFromCart', this.item.id)
+                        .then(this.onRemoveComplete)
+                        .catch(this.onRemoveFailed)
+                        .then(() => this.isLoading = false);
+                }
+            },
+            onRemoveComplete() {
+                console.log ('all done');
+            },
+            onRemoveFailed(err) {
+                // @todo: provide an error state
+                console.error(err);
+            },
+        },
+        props: [
+            'item',
+        ],
+    };
+</script>

@@ -29,16 +29,16 @@ var webpackConfig = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({ 'process.env': env }),
 
         // minify our javascript
-        new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }}),
+        // new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }}),
 
         // extract css into its own file and minify it
         new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
-        new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.css$/g,
-            canPrint: false,
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: { removeAll: true }},
-        }),
+        // new OptimizeCssAssetsPlugin({
+        //     assetNameRegExp: /\.css$/g,
+        //     canPrint: false,
+        //     cssProcessor: require('cssnano'),
+        //     cssProcessorOptions: { discardComments: { removeAll: true }},
+        // }),
 
         // minify our root .htm file and inject production assets
         new HtmlWebpackPlugin({
