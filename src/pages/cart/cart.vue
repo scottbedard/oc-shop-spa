@@ -12,7 +12,7 @@
     }
 
     .empty-message {
-        text-align: center;
+
     }
 </style>
 
@@ -50,17 +50,28 @@
         </div>
 
         <div v-else class="items">
+            <!-- Header -->
             <div class="row">
                 <div class="header cell product">Product</div>
                 <div class="header cell price">Price</div>
                 <div class="header cell quantity">Quantity</div>
                 <div class="header cell remove">Remove</div>
             </div>
+
+            <!-- Items -->
             <v-item
                 v-for="item in cart.items"
                 :item="item"
                 :key="item.id"
             />
+
+            <!-- Footer -->
+            <div class="row">
+                <div class="cell product"></div>
+                <div class="cell price">{{ cartTotal | money }}</div>
+                <div class="cell quantity">update</div>
+                <div class="cell remove"></div>
+            </div>
         </div>
     </v-page>
 </template>
@@ -75,6 +86,7 @@
         computed: {
             ...mapGetters({
                 cartIsEmpty: 'shop/cartIsEmpty',
+                cartTotal: 'shop/cartTotal',
             }),
             ...mapState({
                 cart: state => state.shop.cart,

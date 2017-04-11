@@ -3,6 +3,10 @@
         transition: opacity 150ms ease-in-out;
     }
 
+    .cell {
+        padding: 12px 0;
+    }
+
     .is-loading {
         opacity: 0.5;
     }
@@ -31,8 +35,7 @@
         </div>
         <div class="cell remove">
             <a href="#" @click.prevent="onRemoveClicked">
-                <!-- <i class="fa fa-times"></i> -->
-                Remove
+                <i class="fa fa-times"></i>
             </a>
         </div>
     </div>

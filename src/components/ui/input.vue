@@ -17,14 +17,14 @@
         // sizes
         //
         &.size-small {
-            height: 24px;
-            line-height: 24px;
-            padding: 0 10px;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 20px;
         }
 
         &.size-medium {
-            height: 40px;
-            line-height: 40px;
+            height: 48px;
+            line-height: 48px;
             padding: 0 20px;
         }
     }
@@ -52,6 +52,7 @@
         },
         props: {
             size: {
+                default: 'medium',
                 type: String,
                 validator(size) {
                     return [
