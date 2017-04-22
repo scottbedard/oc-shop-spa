@@ -60,7 +60,7 @@
     export default {
         computed: {
             ...mapGetters({
-                items: 'shop/itemsInCart',
+                items: 'shop/itemCount',
             }),
         },
     };

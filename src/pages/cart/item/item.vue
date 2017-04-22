@@ -30,7 +30,7 @@
                 min="0"
                 size="small"
                 type="number"
-                :max="inventory.quantity"
+                :max="max"
             />
         </div>
         <div class="cell remove">
@@ -57,8 +57,24 @@
             name() {
                 return this.item.product.name;
             },
+            max() {
+                return this.inventory ? this.inventory.quantity : null;
+            },
         },
         methods: {
+            onQuantityChanged(quantity) {
+                this.isLoading = true;
+
+                const payload = {
+                    inventoryId: this.item.inventory_id,
+                    quantity: this.quantity,
+                };
+
+                this.$store.dispatch('shop/updateQuantity', payload)
+                    .then(this.onUpdateComplete)
+                    .catch(this.onUpdateFailed)
+                    .then(() => this.isLoading = false);
+            },
             onRemoveClicked() {
                 if (! this.isLoading) {
                     this.isLoading = true;
@@ -76,9 +92,19 @@
                 // @todo: provide an error state
                 console.error(err);
             },
+            onUpdateComplete() {
+                console.log ('done');
+            },
+            onUpdateFailed(err) {
+                // @todo: provide an error state
+                console.error(err);
+            },
         },
         props: [
             'item',
         ],
+        watch: {
+            quantity: 'onQuantityChanged',
+        },
     };
 </script>
