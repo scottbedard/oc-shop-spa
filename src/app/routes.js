@@ -43,4 +43,13 @@ export default [
         path: '/product/:slug',
         component: require('src/pages/products/show/show'),
     },
+
+    //
+    // stripe checkout
+    //
+    {
+        name: 'stripe-checkout',
+        path: '/checkout',
+        component: require('src/pages/stripe_checkout/stripe_checkout'),
+    },
 ];

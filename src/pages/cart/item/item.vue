@@ -86,14 +86,14 @@
                 }
             },
             onRemoveComplete() {
-                console.log ('all done');
+                console.log ('Cart item removed');
             },
             onRemoveFailed(err) {
                 // @todo: provide an error state
                 console.error(err);
             },
             onUpdateComplete() {
-                console.log ('done');
+                console.log ('Updated cart item');
             },
             onUpdateFailed(err) {
                 // @todo: provide an error state

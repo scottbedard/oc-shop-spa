@@ -5,6 +5,8 @@ export default {
     // layout
     //
     'v-card': require('./layout/card'),
+    'v-grid-cell': require('./layout/grid_cell'),
+    'v-grid': require('./layout/grid'),
     'v-loading': require('./layout/loading'),
     'v-page': require('./layout/page'),
 

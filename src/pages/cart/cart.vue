@@ -11,8 +11,10 @@
         font-weight: bold;
     }
 
-    .empty-message {
-
+    .footer {
+        > div {
+            padding: 12px 0;
+        }
     }
 </style>
 
@@ -66,10 +68,14 @@
             />
 
             <!-- Footer -->
-            <div class="row">
+            <div class="footer row">
                 <div class="cell product"></div>
                 <div class="cell price">{{ cartTotal | money }}</div>
-                <div class="cell quantity">update</div>
+                <div class="cell quantity">
+                    <v-button class="checkout-link" size="small" :to="{ name: 'stripe-checkout' }">
+                        Checkout
+                    </v-button>
+                </div>
                 <div class="cell remove"></div>
             </div>
         </div>

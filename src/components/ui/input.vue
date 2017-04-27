@@ -54,12 +54,7 @@
             size: {
                 default: 'medium',
                 type: String,
-                validator(size) {
-                    return [
-                        'small',
-                        'medium',
-                    ].indexOf(size) > -1;
-                },
+                validator: size => ['small', 'medium'].indexOf(size) > -1,
             },
             value: {},
         },
