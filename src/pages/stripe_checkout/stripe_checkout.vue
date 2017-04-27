@@ -10,7 +10,7 @@
                 left
             </v-grid-cell>
             <v-grid-cell :tablet="6">
-                right
+                <v-login />
             </v-grid-cell>
         </v-grid>
     </div>

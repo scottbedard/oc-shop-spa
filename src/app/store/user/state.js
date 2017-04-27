@@ -1,0 +1,6 @@
+//
+// user state
+//
+export default {
+
+};

@@ -1,0 +1,6 @@
+//
+// user mutations
+//
+export default {
+
+};
