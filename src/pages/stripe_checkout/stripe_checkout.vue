@@ -3,15 +3,14 @@
 </style>
 
 <template>
-    <div>
-        Stripe checkout
-        <v-grid>
+    <v-page>
+        <v-grid padded>
             <v-grid-cell :tablet="6">
-                left
+                left side
             </v-grid-cell>
             <v-grid-cell :tablet="6">
                 <v-login />
             </v-grid-cell>
         </v-grid>
-    </div>
+    </v-page>
 </template>

@@ -3,6 +3,14 @@
         display: flex;
         flex-wrap: wrap;
         flex: 1;
+
+        &.v-padded {
+            margin: -10px;
+
+            .v-grid-cell {
+                padding: 10px;
+            }
+        }
     }
 </style>
 
@@ -15,6 +23,7 @@
                 '_v-global',
                 'v-grid',
                 data.staticClass || '',
+                props.padded ? 'v-padded' : '',
             ]}>
                 { children }
             </TagName>;
