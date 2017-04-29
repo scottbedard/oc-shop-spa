@@ -11,4 +11,10 @@ export default {
     setLoginPassword(state, password) {
         state.loginForm.password = password;
     },
+    setLogoutIsLoading(state, logoutIsLoading) {
+        state.logoutIsLoading = logoutIsLoading;
+    },
+    setModel(state, model) {
+        state.model = model;
+    },
 };

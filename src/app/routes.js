@@ -36,6 +36,15 @@ export default [
     },
 
     //
+    // logout
+    //
+    {
+        name: 'logout',
+        path: '/logout',
+        component: require('src/pages/logout/logout'),
+    },
+
+    //
     // products
     //
     {

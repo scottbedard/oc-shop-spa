@@ -9,17 +9,22 @@
     }
 
     .v-header-title {
+        display: flex;
         font-size: 22px;
         font-weight: 300;
         position: absolute;
         right: 50%;
-        transform: translateX(50%) translateY(-50%);
         top: 50%;
+        transform: translateX(50%) translateY(-50%);
         transition: right $duration ease-in-out, transform $duration ease-in-out;
 
         @include bp(tablet) {
             right: 20px;
             transform: translateX(0%) translateY(-50%);
+        }
+
+        > a {
+            margin-left: 20px;
         }
     }
 
@@ -42,6 +47,26 @@
             transform: translateY(0%);
         }
     }
+
+    .user {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 14px;
+        justify-content: flex-end;
+        text-align: right;
+
+        > div,
+        > a {
+            display: block;
+            flex-basis: auto;
+            width: 100%;
+        }
+
+        > a {
+            font-size: 12px;
+        }
+    }
 </style>
 
 <template>
@@ -62,11 +87,21 @@
         />
 
         <!-- Title -->
-        <router-link class="v-header-title" to="/">oc-shop-plugin</router-link>
+        <div class="v-header-title">
+            <div v-if="isAuthenticated" class="user">
+                <div>Signed in as {{ user.email }}</div>
+                <router-link :to="{ name: 'logout' }">Sign out</router-link>
+            </div>
+            <a href="https://github.com/scottbedard/oc-shop-plugin">
+                <i class="fa fa-github"></i>
+            </a>
+        </div>
     </header>
 </template>
 
 <script>
+    import { mapGetters, mapState } from 'vuex';
+
     export default {
         created() {
             // close the mobile nav when the window is resized
@@ -76,6 +111,14 @@
             return {
                 mobileNavIsActive: false,
             };
+        },
+        computed: {
+            ...mapGetters({
+                isAuthenticated: 'user/isAuthenticated',
+            }),
+            ...mapState({
+                user: state => state.user.model,
+            }),
         },
         components: {
             'v-desktop-nav': require('./nav/desktop'),

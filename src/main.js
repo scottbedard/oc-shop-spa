@@ -4,12 +4,10 @@ import VueRouter from 'vue-router';
 // set up our global plugins and utilities
 import './app/boot';
 
-// parse the initial state of our cart
-let data = JSON.parse(document.querySelector('meta[name="bedard.shop"]').content);
-
 // once vuex is installed, install our shop module
 import store from './app/store';
 import shop from 'oc-shop-api';
+import data from './app/initial_data';
 shop.sync(store, { cart: data.cart });
 
 // set up the router
